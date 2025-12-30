@@ -124,5 +124,6 @@ def fetch_samples(file_type, target_count=10):
 
 if __name__ == "__main__":
     init_setup()
-    fetch_samples("docx", target_count=10)
-    fetch_samples("xlsx", target_count=10)
+    fetch_samples("docx", target_count=100)
+    fetch_samples("xlsx", target_count=75)
+    fetch_samples("pptx", target_count=50)
