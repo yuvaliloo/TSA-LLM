@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # NO prefixes, because we are inside the folder now
-COPY requirements.txt .
+COPY requirements.txt 
 
 RUN pip install --no-cache-dir -r requirements.txt
 
