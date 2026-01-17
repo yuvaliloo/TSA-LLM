@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Malware Analysis</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; text-align: center; background: #f4f4f9; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .malware { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .benign { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        #loading { display: none; margin-top: 10px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentinel Ensemble</h1>
+        <p>Upload an OOXML file (.docx, .xlsx, .pptx) for analysis</p>
+        
+        <form id="uploadForm">
+            <input type="file" id="fileInput" name="file" accept=".docx,.xlsx,.pptx" required>
+            <br><br>
+            <button type="submit">Analyze File</button>
+        </form>
+
+        <div id="loading">Scanning with RAG, SFEM, and LLM...</div>
+
+        <div id="resultBox" class="result-box">
+            <h2 id="verdict"></h2>
+            <p>Confidence: <span id="confidence"></span>%</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultBox').style.display = 'none';
+
+            try {
+                // Change '/scan' to match your actual Flask route
+                const response = await fetch('/scan', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                const resultBox = document.getElementById('resultBox');
+                const verdict = document.getElementById('verdict');
+                const confidence = document.getElementById('confidence');
+
+                verdict.innerText = data.prediction.toUpperCase();
+                confidence.innerText = (data.confidence * 100).toFixed(2);
+
+                resultBox.className = 'result-box ' + data.prediction.toLowerCase();
+                resultBox.style.display = 'block';
+            } catch (error) {
+                alert("Error analyzing file. Check console for details.");
+                console.error(error);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

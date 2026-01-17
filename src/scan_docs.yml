@@ -1,0 +1,11 @@
+tags:
+  - Analysis
+parameters:
+  - name: file
+    in: formData
+    type: file
+    required: true
+    description: The OOXML file (.docx, .xlsx, .pptx) to be analyzed.
+responses:
+  200:
+    description: Successful analysis result

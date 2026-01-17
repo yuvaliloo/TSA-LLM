@@ -1,0 +1,19 @@
+version: '3.8' # You can remove this to stop the warning
+services:
+  sentinel-ensemble:
+    build: .
+    container_name: tsa_llm_ensemble
+    ports:
+      - "5000:5000"
+    volumes:
+      # Map the FOLDER where the script lives to the container's /app
+      - ./src:/app
+      # Map the models folder
+      - ./models:/app/models
+      # Map the memory folder
+      - ./src/sentinel_memory:/app/sentinel_memory
+      
+    deploy:
+      resources:
+        limits:
+          memory: 8G 
