@@ -1,9 +1,9 @@
 *
-!TSA-LLM/requirements.txt
-!TSA-LLM/src/EnsemblePipeline.py
-!TSA-LLM/src/LLMSentinel_v3.py
-!TSA-LLM/src/sfem_features.py
-!TSA-LLM/src/scan_docs.yml
-!TSA-LLM/src/templates/
-!TSA-LLM/models/
-!TSA-LLM/src/sentinel_memory/
+!requirements.txt
+!src/EnsemblePipeline.py
+!src/LLMSentinel_v3.py
+!src/sfem_features.py
+!src/scan_docs.yml
+!src/templates/
+!models/
+!src/sentinel_memory/
